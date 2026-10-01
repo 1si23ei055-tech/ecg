@@ -1,0 +1,21 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: ecg-dashboard-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ecg_dev_password
+      MONGO_INITDB_DATABASE: ecg_dashboard
+    volumes:
+      - ecg_mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  ecg_mongo_data:

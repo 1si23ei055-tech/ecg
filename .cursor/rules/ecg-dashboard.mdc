@@ -1,0 +1,14 @@
+---
+description: ECG Wearable Patch dashboard conventions and architecture
+globs: app/**/*,lib/**/*,components/**/*
+alwaysApply: false
+---
+
+# ECG Dashboard
+
+Read `docs/KNOWLEDGE_BASE.md` before large changes.
+
+- Next.js App Router + Tailwind; MongoDB via Mongoose; session cookie auth.
+- Ingest via `POST /api/ecg` and `POST /api/events`; realtime via SSE `/api/stream`.
+- UI copy must say **Rhythm Change Event** (algorithm indication), not diagnoses.
+- Keep ingest validation in Zod schemas under `lib/ecg/` and services under `lib/services/`.
